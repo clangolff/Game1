@@ -41,8 +41,8 @@ public class PanelLocalisation extends JPanel{
 		this.setLayout(new GridLayout(1,1));	
 		this.add(btn);
 
-		isActif = false;
-
+		//isActif = false;
+		isActif = true;
 		btn.addChangeListener(new ChangeListener() {
                         public void stateChanged(ChangeEvent e) {
                                 isActif = !isActif;
@@ -104,7 +104,6 @@ public class PanelLocalisation extends JPanel{
 
 
 		g.drawImage(localisation, x, y, newWidth, newHeight, this);
-		System.out.println("coucou");
     	}
 
     	public static void main(String[] args) {
