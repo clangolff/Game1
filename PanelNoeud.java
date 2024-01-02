@@ -1,155 +1,59 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.border.Border;
-
+import javax.swing.border.*;
+		
 public class PanelNoeud extends JPanel {
 
-	private int w;
-	private int h;
-	
-	// panel principaux
 	ImagePanel perso;
-	JPanel mainPanel;
-
-	// subpanel
 	ImagePanel objet;
-	//PanelLocalisation pLocal;
+	PanelLocalisation pLocal;
 	JLabel titreVille;
 
-	JPanel jNorth;
-	JPanel jCenter;
-	JPanel jSouth;
+	JPanel p;	
 
-
-	public PanelNoeud(int width, int height) {
+	public PanelNoeud() {
 
 		this.setLayout(new BorderLayout());
 		this.setOpaque(false);
-		
-		this.w = width;
-		this.h = height;
-		
-		// panel principaux
+
 		perso = new ImagePanel("J1.png");
-		perso.setOpaque(false);
-		mainPanel = new JPanel();
-		mainPanel.setLayout(new BorderLayout());
-		mainPanel.setOpaque(false);
-
-		// subpanel
+		titreVille = new JLabel("blablblbl",SwingConstants.CENTER);
 		objet = new ImagePanel("bouclier.png");
-		objet.setOpaque(false);
-		//pLocal = new PanelLocalisation();
-		titreVille = new JLabel("blablablal");
-		titreVille.setOpaque(false);
-
-		jNorth = new JPanel();
-		jNorth.setOpaque(false);
+		pLocal = new PanelLocalisation();
 		
-		jCenter = new JPanel();
-		jCenter.setOpaque(false);
-		jCenter.setLayout(new BorderLayout());
+		p = new JPanel(new BorderLayout());
+		p.setOpaque(false);
 
-		jSouth = new JPanel();
-		jSouth.setOpaque(false);
+		this.add(p,BorderLayout.CENTER);
+		this.add(perso,BorderLayout.WEST);
+		this.add(objet,BorderLayout.EAST);
 
-		//########
-		//pLocal.getBtn().setEnabled(true);
-		//########
-		configureLayout();	
+		p.add(titreVille,BorderLayout.SOUTH);
+		p.add(pLocal,BorderLayout.CENTER);
 
 	}
-/*
-	public JButton getBtn() {
-		return this.pLocal.getBtn();
-	}
-*/
+
+	
+
 	private void configureLayout() {
-        	this.w = this.getWidth();
-        	this.h = this.getHeight();
+		int w = getWidth();
+        	int h = getHeight();
 
-		System.out.println(this.w+" "+this.h);		
-		// panel principaux
-        	perso.setPreferredSize(new Dimension(w / 3, h));
-        	perso.setBorder(BorderFactory.createLineBorder(Color.black));
-		
-		this.add(perso, BorderLayout.WEST);
-        	mainPanel.setPreferredSize(new Dimension(2 * w / 3, h));
-        	this.add(mainPanel, BorderLayout.CENTER);
-
-        	// subpanel
-        	titreVille.setPreferredSize(new Dimension(2 * w / 3, h / 8));
-        	mainPanel.add(titreVille, BorderLayout.NORTH);
-        	jSouth.setPreferredSize(new Dimension(2 * w / 3, getCenterPoint().y - h / 8));
-        	mainPanel.add(jSouth, BorderLayout.SOUTH);
-
-        	//pLocal.setPreferredSize(new Dimension(w / 3, h / 2));
-  		//pLocal.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-
-		//jCenter.add(pLocal, BorderLayout.WEST);
-
-        	objet.setPreferredSize(new Dimension(w / 3, h / 2));
-		objet.setBorder(BorderFactory.createLineBorder(Color.RED));
-
-        	jCenter.add(objet, BorderLayout.CENTER);
-		jCenter.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+		perso.setPreferredSize(new Dimension(w/4,h));
+		objet.setPreferredSize(new Dimension(w/4,h));
 
 
-        	mainPanel.add(jCenter, BorderLayout.CENTER);
-    		mainPanel.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
-
+		int pw = p.getWidth();
+		int ph = p.getHeight();
+		titreVille.setPreferredSize(new Dimension(pw,ph/4));
 	}
-	
-	
-	
-	// cette méthode est appelé des qu'on resize la fenetre
+
 	protected void paintComponent(Graphics g) {
         	super.paintComponent(g);
-        /*	this.w = this.getWidth();
-        	this.h = this.getHeight();
-
-
-		// panel principaux
-		perso.setPreferredSize(new Dimension(w/3,h));
-		this.add(perso,BorderLayout.WEST);
-		mainPanel.setPreferredSize(new Dimension(2*w/3,h));
-		this.add(mainPanel,BorderLayout.CENTER);
-
-		// subpanel
-		titreVille.setPreferredSize(new Dimension(2*w/3,h/8));
-		mainPanel.add(titreVille,BorderLayout.NORTH);
-		jSouth.setPreferredSize(new Dimension(2*w/3,getCenterPoint().y-h/8));
-		mainPanel.add(jSouth,BorderLayout.SOUTH);
-		
-		pLocal.setPreferredSize(new Dimension(w/3,h/2));
-		jCenter.add(pLocal,BorderLayout.WEST);
-
-		objet.setPreferredSize(new Dimension(w/3,h/2));
-		jCenter.add(objet,BorderLayout.CENTER);
-		
-		mainPanel.add(jCenter,BorderLayout.CENTER);
-*/
-		configureLayout();
+       		configureLayout();
 	}
 
-	public Point getCenterPoint() {
-        	int x = this.getX() + this.getWidth() / 2;
-        	int y = this.getY() + this.getHeight() / 2;
-        	return new Point(x, y);
-	}
 
-	// Definit les coordonnees du PanelNoeud
-	public class Point {
-		public int x;
-		public int y;
-		
-		public Point(int X,int Y) {
-			this.x = X;
-			this.y = Y;
-		}
-	}
 	public static void main(String args[]) {
 		final int WIDTH = 800;
 		final int HEIGHT = 600;
@@ -158,13 +62,11 @@ public class PanelNoeud extends JPanel {
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 f.setSize(WIDTH,HEIGHT);
 
-		f.setLayout(new GridLayout(3,3));
 		Container c = f.getContentPane();
-
-		for (int i=0;i<9;i++){
-			PanelNoeud pn = new PanelNoeud(WIDTH,HEIGHT);	
-			c.add(pn);
-		}
+		PanelNoeud pn = new PanelNoeud();
+		c.add(pn);
 		f.setVisible(true);
+		pn.repaint();
+
 	}
 }
