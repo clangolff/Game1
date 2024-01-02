@@ -14,6 +14,7 @@ public class GestionnaireVueClient {
 //	private VueConnexion vueConnexion;
 
 	private PanelMap pm;
+	private PanelAction pa;
 
 	private Action actionChoisie;
 	private int numNoeudChoisi;
@@ -23,11 +24,13 @@ public class GestionnaireVueClient {
 
 	final int NBNOEUDMAX = 16;
 
-	public GestionnaireVueClient(PanelMap panel,Object objet) {
-		this.o = objet;
-		this.pm = panel;
-		
+	public GestionnaireVueClient(PanelMap panelM,PanelAction panelA) {
+		this.o = new Object();
+		this.pm = panelM;
+		this.pa = panelA;
+
 		addActionListenerBtnNoeud();
+		addActionListenerBtnAction();
 	}
 	
 /*	public void setVue(VueMain v) {
@@ -140,12 +143,12 @@ public class GestionnaireVueClient {
 		return b;
 	}
 
-/*
+
 	public void addActionListenerBtnAction() {
 		for (Action a : Action.values()) {
 		 
 			// recupération du btn pour lui ajouter un event listener et recupérer l'action
-			ImageButton btn = this.vue.getPanelAction().getBtn(a);
+			ImageButton btn = pa.getBtn(a);
 				
 			btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -163,7 +166,7 @@ public class GestionnaireVueClient {
 		// on enable les btn action qui sont valides
 		for (Action a : Action.values()) {
 			if (estValide(a,p,posPerso)) {
-				this.vue.getPanelAction().enableBtnAction(a,true);
+				pa.enableBtnAction(a,true);
 			}
 		}
 
@@ -178,11 +181,11 @@ public class GestionnaireVueClient {
 	
 		// on disable les boutons actions
 		for (Action a : Action.values()) {
-			this.vue.getPanelAction().enableBtnAction(a,false);
+			pa.enableBtnAction(a,false);
 		}
 		return actionChoisie;
 	}
-*/
+
 	public void addActionListenerBtnNoeud() {
 		for(PanelNoeud pn : pm.getListePanelNoeud()) {
 			JButton btn = pn.getBtn();
@@ -383,20 +386,29 @@ public class GestionnaireVueClient {
                 f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 f1.setSize(1298, 696);
  
+		f1.setLayout(new BorderLayout());
+		
 		PanelMap pm = new PanelMap(plateau);
-                Container c = f1.getContentPane();
-                c.add(pm);
+                PanelAction pa = new PanelAction();
+
+		pa.setPreferredSize(new Dimension(f1.getWidth()/8,f1.getHeight()));
+		Container c = f1.getContentPane();
+                c.add(pm,BorderLayout.CENTER);
+		c.add(pa,BorderLayout.EAST);
+
                 f1.pack();
                 f1.setSize(1298,696);
                 pm.revalidate();
                 pm.repaint();
 
 		f1.setVisible(true);
-		Object o = new Object();
-		GestionnaireVueClient g = new GestionnaireVueClient(pm,o);
-		int k = g.retournerIndexNoeud(Action.seDeplacer,plateau,n1);
 		
-		System.out.println("se deplace sur "+k);
+		GestionnaireVueClient g = new GestionnaireVueClient(pm,pa);
+
+		Action a = g.retournerAction(plateau,n1);
+		int k = g.retournerIndexNoeud(a,plateau,n1);
+		
+		System.out.println(a.toString()+" sur "+k);
 
 	}
 }
