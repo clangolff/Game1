@@ -106,6 +106,10 @@ public class PanelNoeud extends JPanel {
 		return pLocal.getBtn();
 	}
 
+	public Noeud getNoeud() {
+		return this.n;	
+	}
+
 	public static void main(String args[]) {
 		final int WIDTH = 800;
 		final int HEIGHT = 600;

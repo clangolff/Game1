@@ -70,11 +70,19 @@ public class PanelMap extends JPanel{
 	}
 
 
-	public void enableNoeud(boolean b, ArrayList<Noeud> listeNoeud) {
-		for (Noeud n : listeNoeud) {
-			int index = n.GetNumero();
-			this.listePanelNoeud.get(index).getBtn().setEnabled(b);
-		}
+	public ArrayList<PanelNoeud> getListePanelNoeud() {
+		return this.listePanelNoeud;
+	}
+	
+
+	public void enableNoeud(boolean b, Noeud n) {
+		int index = n.GetNumero();
+		this.listePanelNoeud.get(index).getBtn().setEnabled(b);
+	}
+
+
+	public boolean isNoeudEnabled(Noeud n) {
+		return this.listePanelNoeud.get(n.GetNumero()).getBtn().isEnabled();
 	}
 
 /*
@@ -97,8 +105,9 @@ public class PanelMap extends JPanel{
 */
 	
 	// Sert pour Gestionnaire vue client
-	public JButton getBtn(int i) {
-		return this.listePanelNoeud.get(i).getBtn();  
+	public JButton getBtn(Noeud n) {
+		int k = n.GetNumero();
+		return this.listePanelNoeud.get(k).getBtn();  
 	}
 	
 	// Remarque : Cette fonction est appelée quand on est sur qu'il y a panelNoeud qui a son btnCliquer a vrai
@@ -303,11 +312,13 @@ public class PanelMap extends JPanel{
 		LN.remove(n1);
 		LN.add(vide);
 
-                JButton btn = new JButton("changez l'effet");
-                btn.addActionListener(new ActionListener() {
+                JButton button = new JButton("changez l'effet");
+                button.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
-                                pm.enableNoeud(true,plateau.GetListeNoeud());;
                         	pm.updatePanel(LN);
+				for (PanelNoeud pn : pm.getListePanelNoeud()) {
+					pn.getBtn().setEnabled(!pn.getBtn().isEnabled());
+				}
 				f1.revalidate();
 				f1.repaint();
 				f1.pack();
@@ -315,8 +326,19 @@ public class PanelMap extends JPanel{
 			}
                 });
 
+
+		for (PanelNoeud pn : pm.getListePanelNoeud()) {
+			JButton btn = pn.getBtn();
+			int k = pn.getNoeud().GetNumero();
+			btn.addActionListener(new ActionListener() {
+            			public void actionPerformed(ActionEvent e) {
+                			System.out.println("bouton "+k+" Cliqué");
+            			}
+        		});
+
+		}
                 
-                f2.add(btn);
+                f2.add(button);
 
                 
 		f1.setLocationRelativeTo(null);
