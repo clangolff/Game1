@@ -167,8 +167,11 @@ public class GestionnaireVueClient {
 		for (Action a : Action.values()) {
 			if (estValide(a,p,posPerso)) {
 				pa.enableBtnAction(a,true);
+				System.out.println("j'enable le bouton "+a.toString());
 			}
 		}
+
+		pa.updatePanel();
 
 		synchronized (this.o) {
 			try {
@@ -183,6 +186,8 @@ public class GestionnaireVueClient {
 		for (Action a : Action.values()) {
 			pa.enableBtnAction(a,false);
 		}
+
+		pa.updatePanel();
 		return actionChoisie;
 	}
 
@@ -332,8 +337,8 @@ public class GestionnaireVueClient {
                 Noeud n16 = new Noeud("Boiséclosion",15, foret);
 
                 n1.SetPersonnage(J1);
-                n9.SetPersonnage(J2);
-                n11.SetPersonnage(J3);
+                n6.SetPersonnage(J2);
+                n9.SetPersonnage(J3);
                 n16.SetPersonnage(J4);
 
                 n1.SetConsommable(new Consommable("bouclier",0,0));
@@ -382,6 +387,8 @@ public class GestionnaireVueClient {
 
                 System.out.println(plateau.toString());
 
+		J2.SetDoitJouer(true);
+
 		JFrame f1 = new JFrame();
                 f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 f1.setSize(1298, 696);
@@ -408,8 +415,8 @@ public class GestionnaireVueClient {
 		
 		GestionnaireVueClient g = new GestionnaireVueClient(pm,pa);
 
-		Action a = g.retournerAction(plateau,n1);
-		int k = g.retournerIndexNoeud(a,plateau,n1);
+		Action a = g.retournerAction(plateau,n6);
+		int k = g.retournerIndexNoeud(a,plateau,n6);
 		
 		System.out.println(a.toString()+" sur "+k);
 

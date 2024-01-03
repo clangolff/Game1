@@ -7,21 +7,21 @@ import java.awt.event.ActionListener;
 import javax.imageio.ImageIO;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PanelAction extends JPanel {
 	
 	private Image image;
-	private ArrayList<ImageButton> listeBtn = new ArrayList<ImageButton>();
 
-	// pour renvoyer au client le bouton action cliquer
-	private boolean btnCliquer = false;
-	private Action action = null; 
-	
-	public PanelAction(/*int l, int h*/) {
+	private ArrayList<BordEtincelantRect> listeBord;	
+	private ArrayList<ImageButton> listeBtn;
+	private Map<BordEtincelantRect,ImageButton> panelButtonMapping;
+
+	public PanelAction() {
 		
 		image = new ImageIcon("Bords.png").getImage();
 		this.setOpaque(false);
-		//this.setPreferredSize(new Dimension(l,h));
 		this.setLayout(new GridLayout(4,1));
 	
 		// FACE DROITE découpage en 4 subPanel pour les 4 boutons d'action
@@ -32,6 +32,10 @@ public class PanelAction extends JPanel {
 		listePathAction.add("epee.png");
 		listePathAction.add("fleche.png");
 			
+		listeBtn = new ArrayList<>();
+		panelButtonMapping = new HashMap<>();
+		listeBord = new ArrayList<>();
+
 		int i = 0;
 		for (Action action : Action.values()) {
 			JPanel b = new JPanel();
@@ -42,7 +46,6 @@ public class PanelAction extends JPanel {
 			ImageButton btn = new ImageButton(path);
 
   			btn.setEnabled(false);
-			listeBtn.add(btn);
 
 			JLabel titreAction = new JLabel(action.toString(), SwingConstants.CENTER);
 
@@ -59,10 +62,35 @@ public class PanelAction extends JPanel {
 			b.add(e, BorderLayout.EAST);
 			b.add(w, BorderLayout.WEST);
 			b.add(s, BorderLayout.SOUTH);
-			
-			this.add(b);
-			i += 1;	
+		
+
+			BordEtincelantRect bord = new BordEtincelantRect();
+			bord.setLayout(new GridLayout(1,1));
+			bord.add(b);
+			this.add(bord);	
+
+			listeBord.add(bord);
+			//this.add(b);
+	
+			//listePanel.add(b);
+			listeBtn.add(btn);	
+			panelButtonMapping.put(listeBord.get(i),listeBtn.get(i));
+			i += 1;
 		}
+
+	
+	}
+
+	public void updatePanel() {
+		for (BordEtincelantRect b : listeBord) {
+			ImageButton btn = panelButtonMapping.get(b);
+			if (btn.isEnabled()) {
+				b.startEffect();
+			} else {
+				b.stopEffect();
+			}
+		}
+
 	}
 
 	public void enableBtnAction(Action a, boolean b) {
@@ -100,4 +128,50 @@ public class PanelAction extends JPanel {
 		}
 		return btn;
 	}
+	
+	public static void main(String[] args) {
+		JFrame f1 = new JFrame();
+                f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                f1.setSize(200, 600);
+
+		PanelAction pa = new PanelAction();
+
+		Container c = f1.getContentPane();
+		c.add(pa);
+
+		f1.pack();
+                f1.setSize(200,600);
+
+                f1.setVisible(true);
+
+	      	JFrame f2 = new JFrame();
+                f2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                f2.setSize(300, 200);
+
+               	for (Action a : Action.values()) {
+
+			ImageButton btn = pa.getBtn(a);
+
+                        btn.addActionListener(new ActionListener() {
+                                public void actionPerformed(ActionEvent e) {
+                                 	System.out.println(a);       
+				}
+                        });
+                }
+
+
+		JButton button = new JButton("changez l'effet");
+                button.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                        	for (Action action : Action.values()) {
+					pa.enableBtnAction(action,true);
+				}
+			}
+                });
+
+
+		f2.add(button);
+	     	f2.setVisible(true);
+	}
 }
+
