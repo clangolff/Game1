@@ -170,10 +170,10 @@ public class PanelMap extends JPanel{
 		for (Noeud n : listeNoeud){
 			PanelNoeud pn = this.listePanelNoeud.get(n.GetNumero());
 			pn.updateNode(n);
-			pn.revalidate();
-			pn.repaint();
-			this.revalidate();
-			this.repaint();			
+			//pn.revalidate();
+			//pn.repaint();
+			//this.revalidate();
+			//this.repaint();			
 		}
 	}
 
@@ -294,8 +294,8 @@ public class PanelMap extends JPanel{
 		c.add(pm);
 		f1.pack();
 		f1.setSize(1298,696);
-		pm.revalidate();
-		pm.repaint();
+		//pm.revalidate();
+		//pm.repaint();
 
 	
 		/*
@@ -319,8 +319,8 @@ public class PanelMap extends JPanel{
 				for (PanelNoeud pn : pm.getListePanelNoeud()) {
 					pn.getBtn().setEnabled(!pn.getBtn().isEnabled());
 				}
-				f1.revalidate();
-				f1.repaint();
+				//f1.revalidate();
+				//f1.repaint();
 				f1.pack();
 				f1.setSize(1298,696);	
 			}
