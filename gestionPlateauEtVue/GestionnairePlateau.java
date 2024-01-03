@@ -358,18 +358,21 @@ public class GestionnairePlateau {
 		VueMain vue = new VueMain(plateau,"thierry");
 		GestionnaireVueClient gc = new GestionnaireVueClient(vue);
 
-		Noeud posPerso = plateau.GetListePersonnage().get(0).GetPosition();
-		Action a = gc.retournerAction(plateau,posPerso);
-		int k = gc.retournerIndexNoeud(a,plateau,posPerso);
+	
+		for (int i=0;i<8;i++) {
+			Noeud posPerso = plateau.GetListePersonnage().get(0).GetPosition();
+			Action a = gc.retournerAction(plateau,posPerso);
+			int k = gc.retournerIndexNoeud(a,plateau,posPerso);
 
-		System.out.println(a.toString()+" sur "+k);
+			System.out.println(a.toString()+" sur "+k);
 
-		Message m = gp.MAJPlateau(a,k);
-		System.out.println(m.toString());
+			Message m = gp.MAJPlateau(a,k);
+			System.out.println(m.toString());
 
-		plateau = gp.getPlateau();
-		gc.updateFrame(plateau);
- 		System.out.println(plateau.toString());
+			plateau = gp.getPlateau();
+			gc.updateFrame(plateau);
+ 			System.out.println(plateau.toString());
+		}
 		
 	}
 

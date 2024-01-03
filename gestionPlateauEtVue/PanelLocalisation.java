@@ -23,7 +23,6 @@ public class PanelLocalisation extends JPanel{
 
 		try {
                         localisation = ImageIO.read(new File("Localisation.png"));
- 
 		} catch (IOException e) {
                         e.printStackTrace();
                 }
