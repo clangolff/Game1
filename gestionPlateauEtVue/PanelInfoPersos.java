@@ -142,6 +142,7 @@ public class PanelInfoPersos extends JPanel {
 				panelStats.removeAll();
 				arrow.removeAll();
 				shield.removeAll();
+				bord.removeAll();
 			}
 
 			
@@ -166,22 +167,31 @@ public class PanelInfoPersos extends JPanel {
 			int bouclier = p.GetBouclier().GetDuree();
 			labelBouclier = new JLabel(bouclier + " tour", SwingConstants.CENTER);
 
+
+			System.out.println("ajout de l'image bouclier");
 			shield.add(bcl);
+			System.out.println("ajout du label");
                         shield.add(labelBouclier);
 			
+			System.out.println("ajput su shield");
 			panelStats.add(shield);
 
+			System.out.println("ajout du panel perso");
 			bord.add(panelPerso);
 
+			System.out.println("ajout du bord");
                         this.add(bord);
+			System.out.println("ajout des stats");
                         this.add(panelStats);
 		
 			doitJouer = p.GetDoitJouer();
 			
 			if (doitJouer) {
 				bord.startEffect();
+				System.out.println("j'ai demarré l'effet");
 			} else {
 				bord.stopEffect();
+				System.out.println("j'ai stoppé l'effet");
 			}
 		}		
 	}

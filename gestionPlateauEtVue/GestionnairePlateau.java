@@ -374,6 +374,7 @@ public class GestionnairePlateau {
  			System.out.println(plateau.toString());
 		}
 		
+		System.out.println("PARTIE FINI");	
 	}
 
 }

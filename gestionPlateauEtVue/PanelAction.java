@@ -96,10 +96,10 @@ public class PanelAction extends JPanel {
 	public void enableBtnAction(Action a, boolean b) {
 		switch(a) {
 			case recuperer :
-				this.listeBtn.get(0).setEnabled(b);
+				this.listeBtn.get(1).setEnabled(b);
 				break;
 			case seDeplacer :
-				this.listeBtn.get(1).setEnabled(b);
+				this.listeBtn.get(0).setEnabled(b);
 				break;
 			case attaquerCac :
 				this.listeBtn.get(2).setEnabled(b);

@@ -59,19 +59,25 @@ public class VueMain extends JFrame {
 
 	public void updateFrame(PlateauDeJeu p) {
 		this.plateau = p;
-
+		System.out.println("mise a jour des panel perso");
+		int k = 0;
 		for(Personnage perso : p.GetListePersonnage()) {
                         this.panelInfoPersos.updatePanel(perso);
+			System.out.println("mise a jour du perso "+k);
+			k+=1;
                 }
 
+		System.out.println("mise a jour du panelMap");
                 this.panelMap.updatePanel(p.GetListeNoeud());
 		
 		// pour etre sur
 		for (Noeud n : p.GetListeNoeud()) {
 			this.panelMap.enableNoeud(false,n);
+			System.out.println("j'enable le noeud"+n.GetNumero());
 		}
 
 		for (Action a : Action.values()) {
+			System.out.println("j'enable le bouton"+a.toString());
 			this.panelAction.enableBtnAction(a,false);
 		}
 

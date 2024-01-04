@@ -168,6 +168,7 @@ public class GestionnaireVueClient {
 		// on enable les btn action qui sont valides
 		for (Action a : Action.values()) {
 			if (estValide(a,p,posPerso)) {
+				System.out.println("j'enable le btn "+a.toString());
 				pa.enableBtnAction(a,true);
 			}
 		}
