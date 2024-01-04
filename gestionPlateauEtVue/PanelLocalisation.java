@@ -18,6 +18,8 @@ public class PanelLocalisation extends JPanel{
  	private BufferedImage localisation;
 	private JButton btn;
 	private boolean isActif;
+	private Image imageGIF1,imageGIF2;
+
 
     	public PanelLocalisation() {
 
@@ -29,7 +31,9 @@ public class PanelLocalisation extends JPanel{
 
 		gif1 = new ImageIcon(getClass().getResource("1ff6.gif"));
 		gif2 = new ImageIcon(getClass().getResource("sm24.gif"));
-    	
+    		imageGIF1 = gif1.getImage();
+		imageGIF2 = gif2.getImage();
+
 		btn = new JButton();
 		btn.setOpaque(false);
 		btn.setContentAreaFilled(false);
@@ -44,8 +48,9 @@ public class PanelLocalisation extends JPanel{
 		//isActif = true;
 		btn.addChangeListener(new ChangeListener() {
                         public void stateChanged(ChangeEvent e) {
-                                isActif = !isActif;
-                                setEffect(isActif);
+                                //isActif = !isActif;
+                                //setEffect(isActif);
+				setEffect(btn.isEnabled());
                         }
                 });
                         
@@ -76,9 +81,9 @@ public class PanelLocalisation extends JPanel{
         	super.paintComponent(g);
 		if (isActif) {
         		if (gif1 != null && gif2 != null) {
-            			Image imageGIF1 = gif1.getImage();
+            			//Image imageGIF1 = gif1.getImage();
             			g.drawImage(imageGIF1, 0, 0, getWidth(), getHeight(), this);
-				Image imageGIF2 = gif2.getImage();
+				//Image imageGIF2 = gif2.getImage();
             			g.drawImage(imageGIF2, 0, 0, getWidth(), getHeight(), this);
 			}
 		
