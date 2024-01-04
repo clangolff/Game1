@@ -357,7 +357,7 @@ public class GestionnairePlateau {
 		plateau.GetListePersonnage().get(0).SetDoitJouer(true);
 		VueMain vue = new VueMain(plateau,"thierry");
 		GestionnaireVueClient gc = new GestionnaireVueClient(vue);
-
+		gc.updateFrame(plateau);
 	
 		for (int i=0;i<8;i++) {
 			Noeud posPerso = plateau.GetListePersonnage().get(0).GetPosition();

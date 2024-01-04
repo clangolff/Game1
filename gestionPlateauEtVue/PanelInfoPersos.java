@@ -193,6 +193,9 @@ public class PanelInfoPersos extends JPanel {
 				bord.stopEffect();
 				System.out.println("j'ai stoppé l'effet");
 			}
+
+			revalidate();
+			repaint();
 		}		
 	}
 	
@@ -204,6 +207,8 @@ public class PanelInfoPersos extends JPanel {
 	public void updatePanel(Personnage p) {
 		PanelInfoJoueur pj = joueurPanelMapping.get(p);
 		pj.updatePanelPerso(p);
+		revalidate();
+		repaint();
 	}
 
 	public static void main(String[] args) {

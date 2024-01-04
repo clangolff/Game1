@@ -171,6 +171,8 @@ public class PanelMap extends JPanel{
 			PanelNoeud pn = this.listePanelNoeud.get(n.GetNumero());
 			pn.updateNode(n);
 		}
+		revalidate();
+		repaint();
 	}
 
 

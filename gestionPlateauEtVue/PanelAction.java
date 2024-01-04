@@ -90,7 +90,6 @@ public class PanelAction extends JPanel {
 				b.stopEffect();
 			}
 		}
-
 	}
 
 	public void enableBtnAction(Action a, boolean b) {

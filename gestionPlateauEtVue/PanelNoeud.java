@@ -73,7 +73,7 @@ public class PanelNoeud extends JPanel {
 
 	protected void paintComponent(Graphics g) {
         	super.paintComponent(g);
-       		configureLayout();
+       		//configureLayout();
 	}
 
        
@@ -100,7 +100,10 @@ public class PanelNoeud extends JPanel {
 		}
 		
 		p.add(pLocal,BorderLayout.CENTER);
-    	}
+		configureLayout();
+		revalidate();
+	    	repaint();	
+	}
 
 	public JButton getBtn() {
 		return pLocal.getBtn();

@@ -49,7 +49,8 @@ public class VueMain extends JFrame {
                 //panelMap.setPreferredSize(new Dimension());
                 panelInfoPersos.setPreferredSize(new Dimension(largeur/6,9*hauteur/10));
 
-
+		this.revalidate();
+		this.repaint();
 		this.pack();
 		this.setSize(largeur,hauteur);
 		this.setVisible(true);
@@ -83,6 +84,8 @@ public class VueMain extends JFrame {
 
 		this.panelAction.updatePanel();
 
+		this.revalidate();
+		this.repaint();
                 this.pack();
                 this.setSize(largeur,hauteur);
 	}	
