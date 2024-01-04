@@ -368,7 +368,7 @@ public class GestionnairePlateau {
 
 			Message m = gp.MAJPlateau(a,k);
 			System.out.println(m.toString());
-
+			new PopUp(m);
 			plateau = gp.getPlateau();
 			gc.updateFrame(plateau);
  			System.out.println(plateau.toString());

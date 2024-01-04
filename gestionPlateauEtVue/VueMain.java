@@ -86,7 +86,7 @@ public class VueMain extends JFrame {
 
 		this.revalidate();
 		this.repaint();
-                this.pack();
+                //this.pack();
                 this.setSize(largeur,hauteur);
 	}	
 

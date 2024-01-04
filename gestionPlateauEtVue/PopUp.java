@@ -22,7 +22,7 @@ public class PopUp  {
         	fenetre.setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
 
 
-		ImagePanel background = new ImagePanel("popUp.jpg");
+		ImagePanel background = new ImagePanel("popup.jpg");
 		background.setLayout(new BorderLayout());
 
 		JPanel temp = new JPanel();
