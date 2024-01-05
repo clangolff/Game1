@@ -44,14 +44,18 @@ public class Client {
 		} catch (Exception e) {}
 	} 
 
-	public void deroulerPartie() {
+	public PlateauDeJeu getPlateau() {
+		return this.p;
+	}
+	
+	public void deroulerPartie(GestionnaireVueClient gvc) {
 		try {
 			//Message m = (Message) ois.readObject();
 			//System.out.println(m.toString());
 			//p = (PlateauDeJeu) ois.readObject();
 			//System.out.println(p.toString());
 			//ois.reset();
-			int nbAction = 0;
+			/*int nbAction = 0;
 			Action a = Action.recuperer;
 			int k;
 			do {
@@ -88,19 +92,47 @@ public class Client {
 				System.out.println(p.toString());
 			
 				nbAction += 1;
-			} while (nbAction != 4);
+			} while (nbAction != 8);*/
+
+			for (int i=0;i<8;i++) {
+				Noeud posPerso = p.GetListePersonnage().get(0).GetPosition();
+				Action a = gvc.retournerAction(p,posPerso);
+				int k = gvc.retournerIndexNoeud(a,p,posPerso);
+
+				System.out.println(a.toString()+" sur "+k);
+				oos.writeObject(a);
+				oos.flush();
+				oos.writeInt(k);
+				oos.flush();				
+				Message m = (Message) ois.readObject();
+				System.out.println(m.toString());
+				p = (PlateauDeJeu) ois.readObject();
+				gvc.updateFrame(p);
+				System.out.println(p.toString());
+			}
+
+			System.out.println("PARTIE FINI");
 		} catch (Exception e) {}
 	}
 
 	public static void main(String[] args) {
+		PlateauDeJeu p;
+		
 		try {
 			Socket s = new Socket(InetAddress.getLocalHost(),1234);
 			ObjectInputStream is = new ObjectInputStream(s.getInputStream());
 			ObjectOutputStream os = new ObjectOutputStream(s.getOutputStream());
 
 			Client c = new Client(s,os,is);
+		
 			c.seConnecter();
-			c.deroulerPartie();
+			p = c.getPlateau();
+			GestionnaireVueClient gvc = new GestionnaireVueClient();
+			gvc.initialiserVue(p,"thierry");
+			gvc.updateFrame(p);
+
+			c.deroulerPartie(gvc);
+		
 		} catch (Exception e) {}
 	}
 }

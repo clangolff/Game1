@@ -80,6 +80,7 @@ public class PanelNoeud extends JPanel {
 	public void updateNode(Noeud updatedNode) {
 		if (p.getComponentCount() > 0) {
            		p.removeAll();
+			this.removeAll();
         	}
 
 		this.n = updatedNode;
@@ -100,6 +101,10 @@ public class PanelNoeud extends JPanel {
 		}
 		
 		p.add(pLocal,BorderLayout.CENTER);
+
+	       	this.add(titreVille,BorderLayout.SOUTH);
+                this.add(p,BorderLayout.CENTER);
+
 		configureLayout();
 		revalidate();
 	    	repaint();	

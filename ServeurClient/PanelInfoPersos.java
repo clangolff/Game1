@@ -14,8 +14,9 @@ public class PanelInfoPersos extends JPanel {
 
 	private ArrayList<Personnage> listePerso;
 	private ArrayList<PanelInfoJoueur> listePanel;
+	private ArrayList<String> listeNom;
 	private Image backGroundMainPanel;
-	private Map<Personnage, PanelInfoJoueur> joueurPanelMapping;
+	private Map<String, PanelInfoJoueur> nomJoueurPanelMapping;
 
 	public PanelInfoPersos(/*int l, int h ,*/ ArrayList<Personnage> persos) {
 		
@@ -43,17 +44,22 @@ public class PanelInfoPersos extends JPanel {
 		this.add(panelPerso3);
 		this.add(panelPerso4);
 		
-		listePanel = new ArrayList<>();
+		listeNom = new ArrayList<>();
+		listeNom.add(p1.GetNom());
+		listeNom.add(p2.GetNom());
+		listeNom.add(p3.GetNom());
+		listeNom.add(p4.GetNom());
 
+		listePanel = new ArrayList<>();
 		listePanel.add(panelPerso1);
 		listePanel.add(panelPerso2);
 		listePanel.add(panelPerso3);
 		listePanel.add(panelPerso4);
 
-		joueurPanelMapping = new HashMap<>();
+		nomJoueurPanelMapping = new HashMap<>();
 
 	        for (int i = 0; i < listePerso.size(); i++) {
-            		joueurPanelMapping.put(listePerso.get(i), listePanel.get(i));
+            		nomJoueurPanelMapping.put(listeNom.get(i), listePanel.get(i));
         	}
 	}
 
@@ -216,7 +222,7 @@ public class PanelInfoPersos extends JPanel {
 		System.out.println("je suis dans le panel info perso");
 		System.out.println(p.GetNom());
 
-		PanelInfoJoueur pj = joueurPanelMapping.get(p);
+		PanelInfoJoueur pj = nomJoueurPanelMapping.get(p.GetNom());
 		
 		System.out.println(pj.toString());
 

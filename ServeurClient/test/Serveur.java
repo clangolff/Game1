@@ -97,7 +97,7 @@ public class Serveur {
         			envoyerPlateau(p);
 				
 				nbAction += 1;
-			} while (nbAction != 4);
+			} while (nbAction != 8);
     		} catch (Exception e) {
         		e.printStackTrace();
     		}
