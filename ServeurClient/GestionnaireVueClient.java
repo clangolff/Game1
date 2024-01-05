@@ -62,6 +62,8 @@ public class GestionnaireVueClient {
 	}
 
 	public void updateFrame(PlateauDeJeu p) {
+		System.out.println("plateau vu depuis le gestionnaire");
+		System.out.println(p.toString());
 		this.vue.updateFrame(p);
 	}
 

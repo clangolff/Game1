@@ -76,17 +76,33 @@ public class Serveur {
 		} catch (Exception e) {}
 	}
 
-public void deroulerPartie() {
-    try {
-        Message m = gp.MAJPlateau(Action.seDeplacer, 2);
-        envoyerMessage(m);
-        p = gp.getPlateau();
-        System.out.println(p.toString());
-        envoyerPlateau(p);
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
+	public void deroulerPartie() {
+    		try {
+        		//Message m = gp.MAJPlateau(Action.seDeplacer, 2);
+        		//envoyerMessage(m);
+        		//p = gp.getPlateau();
+        		//System.out.println(p.toString());
+        		//envoyerPlateau(p);
+			int nbAction = 0;
+			int k;
+			do {
+				Action a = (Action)  ois.readObject();
+				System.out.println(a.toString());
+				k = ois.readInt();
+				System.out.println(k);
+				Message m = gp.MAJPlateau(a, k);
+        			envoyerMessage(m);
+        			p = gp.getPlateau();
+        			System.out.println(p.toString());
+        			envoyerPlateau(p);
+				
+				nbAction += 1;
+			} while (nbAction != 4);
+    		} catch (Exception e) {
+        		e.printStackTrace();
+    		}
 	}
+
 	public static void main(String[] args) {
 		GestionnairePlateau gp = new GestionnairePlateau();
 		Serveur s = new Serveur(gp);

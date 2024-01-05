@@ -145,7 +145,7 @@ public class PanelInfoPersos extends JPanel {
 				bord.removeAll();
 			}
 
-			
+			System.out.println("vie");	
 			int vie = p.GetVie();
 							        
 
@@ -155,6 +155,8 @@ public class PanelInfoPersos extends JPanel {
 			
 			panelStats.add(barreDeVie);
 			
+			System.out.println("fleche");
+
 			int fleches = p.GetCarquois().GetQuantite();
 			labelFleches = new JLabel("x" + fleches, SwingConstants.CENTER);
 	        	labelFleches.setFont(new Font("Arial", Font.BOLD, 17));
@@ -164,6 +166,8 @@ public class PanelInfoPersos extends JPanel {
 
 			panelStats.add(arrow);
 			
+			System.out.println("bouclier");
+
 			int bouclier = p.GetBouclier().GetDuree();
 			labelBouclier = new JLabel(bouclier + " tour", SwingConstants.CENTER);
 
@@ -196,6 +200,10 @@ public class PanelInfoPersos extends JPanel {
 
 			revalidate();
 			repaint();
+		}
+		
+		public String toString() {
+			return this.perso.GetNom();
 		}		
 	}
 	
@@ -205,7 +213,13 @@ public class PanelInfoPersos extends JPanel {
 	}
 
 	public void updatePanel(Personnage p) {
+		System.out.println("je suis dans le panel info perso");
+		System.out.println(p.GetNom());
+
 		PanelInfoJoueur pj = joueurPanelMapping.get(p);
+		
+		System.out.println(pj.toString());
+
 		pj.updatePanelPerso(p);
 		revalidate();
 		repaint();

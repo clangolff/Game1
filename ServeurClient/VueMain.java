@@ -60,8 +60,13 @@ public class VueMain extends JFrame {
 
 	public void updateFrame(PlateauDeJeu p) {
 		this.plateau = p;
+		System.out.println("plateau vu depuis la vue");
+		System.out.println(p.toString());
+		
 		System.out.println("mise a jour des panel perso");
 		int k = 0;
+		
+		
 		for(Personnage perso : p.GetListePersonnage()) {
                         this.panelInfoPersos.updatePanel(perso);
 			System.out.println("mise a jour du perso "+k);

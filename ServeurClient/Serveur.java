@@ -124,12 +124,10 @@ public class Serveur {
 				do {
 					// on récupère en premier l'action
 					action = (Action) in.readObject();
-					in.reset();
 					System.out.println("Action faite : " + action.toString() + " - Joueur "+ indexJQJ);
 					// on récupère l'index du noeud sur lequel doit etre effectué l'action
 					indexNoeud = in.readInt();
 					System.out.println("Noeud sur lequel l'action est effectuee : " + indexNoeud);
-					in.reset();
 					// on fait traiter l'action par le gestionnaire
 					message = this.maitreDuJeu.MAJPlateau(action,indexNoeud);
 					// retourne le messsage de ce qui s'est passé					

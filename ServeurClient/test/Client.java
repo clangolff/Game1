@@ -34,24 +34,61 @@ public class Client {
         		nom = scanner.nextLine();
 			oos.writeUTF(nom);
 			oos.flush();
-			scanner.close();
+			//scanner.close();
 			Message m = (Message) ois.readObject();
 			System.out.println(m.toString());
 			p = (PlateauDeJeu) ois.readObject();
 			System.out.println(p.toString());
-        // Envoyer un signal au serveur pour indiquer que la connexion est terminée
-        oos.writeBoolean(true);
-        oos.flush();
+        		oos.writeBoolean(true);
+        		oos.flush();
 		} catch (Exception e) {}
 	} 
 
 	public void deroulerPartie() {
 		try {
-			Message m = (Message) ois.readObject();
-			System.out.println(m.toString());
-			p = (PlateauDeJeu) ois.readObject();
-			System.out.println(p.toString());
-			ois.reset();
+			//Message m = (Message) ois.readObject();
+			//System.out.println(m.toString());
+			//p = (PlateauDeJeu) ois.readObject();
+			//System.out.println(p.toString());
+			//ois.reset();
+			int nbAction = 0;
+			Action a = Action.recuperer;
+			int k;
+			do {
+				System.out.println("entre une action");
+				String action = scanner.nextLine();
+				switch(action) {
+					case "seDeplacer" : 
+						a = Action.seDeplacer;
+						break;
+					case "recuperer" :
+						a = Action.recuperer;
+						break;
+					case "attaquerArc" :
+						a = Action.attaquerArc;
+						break;
+					case "attaquerCac" :
+						a = Action.attaquerCac;
+						break;
+					default :
+						a = Action.recuperer;
+						break;
+				}
+				oos.writeObject(a);
+				oos.flush();
+				System.out.println("entre un entier");
+				String ent = scanner.nextLine();
+				k = Integer.parseInt(ent);
+				oos.writeInt(k);
+				oos.flush();
+				
+				Message m = (Message) ois.readObject();
+				System.out.println(m.toString());
+				p = (PlateauDeJeu) ois.readObject();
+				System.out.println(p.toString());
+			
+				nbAction += 1;
+			} while (nbAction != 4);
 		} catch (Exception e) {}
 	}
 

@@ -190,14 +190,13 @@ public class Client {
 				
 					System.out.println("J'attends le message de l'action jouee"); 
 					message = (Message) client.getIn().readObject();
-					client.getIn().reset();
 					System.out.println(message); 
 					//client.getGestionnaire().getVue().PopUp(message);	
 					p = (PlateauDeJeu) client.getIn().readObject();
-					client.getIn().reset();
 					client.setPlateau(p);
 
 					System.out.println("\nTour actualise : \n" + p.toString());			
+					gvc.updateFrame(p);
 				}
 			} while (!client.getPlateau().estFini());
 			
